@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Proverbs 31: An Animated Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Hebrew:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gradient-start: #5D41A5; /* Deep Purple */
+            --gradient-mid1: #7A52B8;
+            --gradient-mid2: #9B63C9;
+            --gradient-end: #BF75D9; /* Lighter Purple/Pink */
+            --text-light: #f0e8ff; /* Very light lavender */
+            --text-bright: #ffffff;
+            --text-muted: #d1c4e9; /* Muted lavender */
+            --text-highlight: #f8e71c; /* A soft gold for highlights */
+            --glass-bg: rgba(25, 10, 40, 0.35); /* Darker, richer glass */
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --button-bg: rgba(255, 255, 255, 0.1);
+            --button-hover-bg: rgba(255, 255, 255, 0.2);
+            --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0,0,0,0.25);
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid1), var(--gradient-mid2), var(--gradient-end));
+            background-size: 400% 400%;
+            animation: gradientBG 25s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            min-height: 100dvh; /* Dynamic viewport height */
+            padding: clamp(1rem, 2vh, 2rem) 0.5rem; /* Responsive vertical padding */
+            color: var(--text-light);
+            box-sizing: border-box;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* General container for animated sections */
+        .content-section {
+            width: 95%;
+            max-width: 650px; /* Slightly wider for comfort */
+            margin-bottom: max(4vh, 1.5rem);
+            display: flex;
+            flex-direction: column;
+            gap: max(2.5vh, 0.75rem);
+        }
+        
+        /* Styling for individual animated cards/steps */
+        .animated-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            border-radius: 1rem; /* More pronounced radius */
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--card-shadow);
+            padding: clamp(1rem, 4vw, 1.75rem);
+            opacity: 0;
+            transform: translateY(40px) scale(0.92);
+            transition: opacity 0.9s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.9s cubic-bezier(0.165, 0.84, 0.44, 1);
+            text-align: center;
+        }
+
+        .animated-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .main-title {
+            font-size: clamp(1.8rem, 7.5vw, 2.8rem); /* Larger, more impactful */
+            font-weight: 700;
+            color: var(--text-bright);
+            text-shadow: 0 0 12px rgba(0,0,0,0.6), 0 0 18px rgba(0,0,0,0.4);
+            margin-top: max(3vh, 1rem);
+            margin-bottom: max(4vh, 1.5rem);
+            text-align: center;
+            padding: 0 0.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUpInitial 1.2s ease-out 0.3s forwards; /* Delayed start */
+        }
+        
+        @keyframes fadeInSlideUpInitial {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated-card h2 {
+            font-size: clamp(1.2rem, 5vw, 1.7rem);
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 0.75rem;
+        }
+
+        .animated-card p, .lang-explanation p {
+            font-size: clamp(0.9rem, 3.8vw, 1.1rem); /* Larger base paragraph font */
+            line-height: 1.7; /* Increased line height for readability */
+            color: var(--text-light);
+            font-weight: 300; /* Lighter font weight for body */
+        }
+        .animated-card p strong {
+            font-weight: 600;
+            color: var(--text-bright);
+        }
+
+        .lang-explanation-container {
+            display: flex;
+            flex-direction: column;
+            gap: max(2vh, 0.5rem);
+        }
+        
+        @media (min-width: 500px) {
+            .lang-explanation-container {
+                flex-direction: row;
+            }
+            .lang-explanation {
+                flex: 1;
+            }
+        }
+
+        .lang-explanation {
+            padding: clamp(0.7rem, 3vw, 1.1rem);
+            background: rgba(0,0,0,0.15); /* Slightly different background */
+            border-radius: 0.75rem;
+        }
+        
+        .lang-explanation h3 {
+            font-size: clamp(1.05rem, 4.2vw, 1.4rem);
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 0.4rem;
+        }
+        
+        .marathi-text {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-size: clamp(0.85rem, 3.5vw, 1.05rem);
+            color: #e6dbff;
+        }
+
+        .telugu-text {
+            font-family: 'Noto Sans Telugu', sans-serif;
+            font-size: clamp(0.85rem, 3.5vw, 1.05rem);
+            color: #d4f0ff;
+        }
+
+        /* Explore Button Section */
+        #explore-button-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out 0.5s, transform 1s ease-out 0.5s; /* Delay for button */
+            text-align: center; /* Center the button */
+        }
+        #explore-button-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .explore-button {
+            background: var(--button-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-bright);
+            font-size: clamp(0.95rem, 4vw, 1.15rem);
+            font-weight: 500;
+            padding: clamp(0.75rem, 3vh, 1.25rem) clamp(1.5rem, 6vw, 2.5rem);
+            border-radius: 50px; /* Pill shape */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .explore-button:hover, .explore-button:focus {
+            background: var(--button-hover-bg);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .explore-button .hebrew-char-button {
+            font-family: 'Noto Sans Hebrew', 'Times New Roman', serif;
+            font-size: 1.2em; /* Make Hebrew char slightly larger */
+            color: var(--text-highlight);
+        }
+
+        /* First Word Intro Section */
+        #first-word-intro-section {
+            /* Uses .animated-card for base styling */
+            /* Initially hidden, revealed by JS after button click */
+            display: none; 
+            text-align: left; /* More focused, less centered */
+            padding: clamp(1.25rem, 5vw, 2rem);
+        }
+        #first-word-intro-section.visible {
+            display: flex; /* Or block, depending on desired layout */
+            flex-direction: column;
+            gap: max(2vh, 0.75rem);
+        }
+        .word-intro-item {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .word-intro-item:last-child {
+            border-bottom: none;
+        }
+        .word-intro-item.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .word-intro-item strong {
+            color: var(--text-muted); /* Subtler label */
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+        }
+        .word-intro-item .data-value {
+            font-size: clamp(1.1rem, 4.5vw, 1.5rem); /* Larger data values */
+            font-weight: 600;
+            color: var(--text-bright);
+        }
+        .word-intro-item .hebrew-text-large {
+            font-family: 'Noto Sans Hebrew', 'Times New Roman', serif;
+            font-size: clamp(1.8rem, 8vw, 2.5rem); /* Very large Hebrew */
+            color: var(--text-highlight); /* Highlight color */
+            direction: rtl;
+            text-align: right; /* Align Hebrew to the right within its block */
+        }
+        .word-intro-item .lang-text-large {
+            font-size: clamp(1.2rem, 5vw, 1.6rem);
+        }
+
+
+        /* Table Section (based on code 3) */
+        .table-container {
+            /* Uses .animated-card for base styling and initial animation */
+            display: none; /* Initially hidden, shown after first-word-intro */
+            padding: 0; /* Remove card padding to let table fill it */
+        }
+         .table-container.visible {
+            display: block; /* Show the container */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        th, td {
+            padding: clamp(0.6rem, 2.5vw, 1rem) clamp(0.75rem, 3vw, 1.25rem);
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            word-break: break-word;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.08);
+            font-weight: 600;
+            color: var(--text-bright);
+            font-size: clamp(0.85rem, 3vw, 1rem);
+        }
+        th:first-child { width: 38%; } /* Slightly more space for field names */
+
+        td {
+            color: var(--text-light);
+            font-size: clamp(0.8rem, 2.8vw, 0.95rem);
+            font-weight: 300;
+        }
+        td strong { color: var(--text-bright); font-weight: 500; }
+        tbody tr:hover { background-color: rgba(255, 255, 255, 0.07); }
+        tr:last-child td { border-bottom: none; }
+
+        .table-hebrew-text { /* Differentiate from intro hebrew */
+            font-family: 'Noto Sans Hebrew', 'Times New Roman', serif;
+            font-size: clamp(1rem, 4vw, 1.25rem);
+            direction: rtl;
+            color: #e6e6fa; /* Lavender */
+        }
+        .table-hebrew-root {
+            font-family: 'Noto Sans Hebrew', 'Times New Roman', serif;
+            font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+            direction: rtl;
+            color: #e6e6fa;
+            display: inline-block;
+            margin-right: 0.3rem;
+        }
+        .table-marathi-text, .table-telugu-text {
+            font-family: 'Noto Sans Devanagari', 'Noto Sans Telugu', sans-serif;
+            font-size: clamp(0.9rem, 3.5vw, 1.05rem);
+            color: #d1d8e0; /* Light steel blue */
+        }
+        .table-translit-text {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: clamp(0.75rem, 2.8vw, 0.9rem);
+        }
+        
+        /* Fallback for no JS */
+        .no-js .animated-card, .no-js #explore-button-section, .no-js #first-word-intro-section, .no-js .table-container {
+            opacity: 1 !important;
+            transform: none !important;
+            display: block !important; /* Ensure sections are visible */
+        }
+        .no-js #first-word-intro-section, .no-js .table-container {
+            display: flex !important; /* or block as appropriate for their default state */
+        }
+
+
+    </style>
+</head>
+<body class="no-js"> <h1 class="main-title">Proverbs 31: An Acrostic Journey</h1>
+
+    <div id="acrostic-intro-section" class="content-section">
+        <div class="animated-card" id="step1">
+            <h2>A Hidden Structure</h2>
+            <p>The description of the "Virtuous Woman" in Proverbs 31:10-31 is not just profound wisdom—it's a meticulously crafted <strong>acrostic poem</strong> in original Hebrew.</p>
+        </div>
+
+        <div class="animated-card" id="step2">
+            <h2>What is an Acrostic?</h2>
+            <p>In this type of poem, the first letter of each verse sequentially follows the Hebrew alphabet, from Aleph (א) all the way to Tav (ת). A beautiful literary device!</p>
+        </div>
+
+        <div class="animated-card" id="step3">
+            <h2>The Concept Across Languages</h2>
+            <div class="lang-explanation-container">
+                <div class="lang-explanation" id="marathi-exp">
+                    <h3>मराठी (Marathi)</h3>
+                    <p class="marathi-text">अक्रॉस्टिक (Acrostic) म्हणजे एक अशी काव्यरचना जिथे प्रत्येक ओळीचे, किंवा येथे प्रत्येक वचनाचे, पहिले अक्षर हे हिब्रू वर्णमालेनुसार (अलेफ א पासून ताव ת पर्यंत) क्रमाने येते.</p>
+                </div>
+                <div class="lang-explanation" id="telugu-exp">
+                    <h3>తెలుగు (Telugu)</h3>
+                    <p class="telugu-text">అక్రోస్టిక్ (Acrostic) పద్యంలో, ప్రతి పద్యం యొక్క మొదటి అక్షరం హీబ్రూ అక్షరమాలను అనుసరించి (అలెఫ్ א నుండి తావ్ ת వరకు) క్రమంగా వస్తుంది. ఇది ఒక అద్భుతమైన సాహిత్య రూపం.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="explore-button-section" class="content-section">
+        <button class="explore-button" id="reveal-first-word-btn">
+            Explore the First Word: <span class="hebrew-char-button">א</span> (Aleph)
+        </button>
+    </div>
+
+    <div id="first-word-intro-section" class="animated-card content-section">
+        <h2>Verse 10: The Beginning with <span class="hebrew-char-button" style="font-size:1.5em; color: var(--text-highlight);">א</span></h2>
+        <div class="word-intro-item" id="fw-hebrew-letter">
+            <strong>Hebrew Letter:</strong>
+            <p class="data-value hebrew-text-large">א (Aleph)</p>
+        </div>
+        <div class="word-intro-item" id="fw-hebrew-word">
+            <strong>Hebrew Word:</strong>
+            <p class="data-value hebrew-text-large">אֵשֶׁת (ʾēšet)</p>
+        </div>
+        <div class="word-intro-item" id="fw-english">
+            <strong>English (KJV Summary):</strong>
+            <p class="data-value">"Who can find a virtuous woman? for her price is far above rubies."</p>
+        </div>
+        <div class="word-intro-item" id="fw-marathi">
+            <strong>Marathi Key Word:</strong>
+            <p class="data-value marathi-text lang-text-large">सर्वगुणसंपन्न</p>
+        </div>
+        <div class="word-intro-item" id="fw-telugu">
+            <strong>Telugu Key Word:</strong>
+            <p class="data-value telugu-text lang-text-large">గుణవతియైన</p>
+        </div>
+    </div>
+
+    <div id="full-table-section" class="animated-card table-container content-section">
+        <table>
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Details for Verse 10 (<span class="table-hebrew-text" style="font-size: 1.1em; color: var(--text-highlight);">א</span>)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Hebrew Word</strong></td>
+                    <td class="table-hebrew-text">אֵשֶׁת (ʾēšet)</td>
+                </tr>
+                <tr>
+                    <td><strong>Hebrew Letter</strong></td>
+                    <td class="table-hebrew-text">א (Aleph)</td>
+                </tr>
+                <tr>
+                    <td><strong>KJV Summary</strong></td>
+                    <td>Who can find a virtuous woman? for her price is far above rubies.</td>
+                </tr>
+                <tr>
+                    <td><strong>Root & Gloss</strong></td>
+                    <td><span class="table-hebrew-root">חַיִל</span> (ḥayil) – strength, valor</td>
+                </tr>
+                <tr>
+                    <td><strong>Intent Keyword</strong></td>
+                    <td>Virtuous woman</td>
+                </tr>
+                <tr>
+                    <td><strong>Part of Speech</strong></td>
+                    <td>Noun (construct)</td>
+                </tr>
+                <tr>
+                    <td><strong>Marathi (full)</strong></td>
+                    <td class="table-marathi-text">सर्वगुणसंपन्न स्त्री शोधणे खूप कठीण आहे. पण तिचे मोल जड-जवाहिऱ्यापेक्षा अधिक आहे.</td>
+                </tr>
+                <tr>
+                    <td><strong>Marathi Key</strong></td>
+                    <td class="table-marathi-text">सर्वगुणसंपन्न</td>
+                </tr>
+                <tr>
+                    <td><strong>Marathi Eq.</strong></td>
+                    <td class="table-marathi-text">स्त्री</td>
+                </tr>
+                <tr>
+                    <td><strong>Telugu (full)</strong></td>
+                    <td class="table-telugu-text">గుణవతియైన భార్య దొరుకుట అరుదు అట్టిది ముత్యముకంటె అమూల్యమైనది.</td>
+                </tr>
+                <tr>
+                    <td><strong>Telugu Key</strong></td>
+                    <td class="table-telugu-text">గుణవతియైన</td>
+                </tr>
+                <tr>
+                    <td><strong>Telugu Eq.</strong></td>
+                    <td class="table-telugu-text">భార్య</td>
+                </tr>
+                <tr>
+                    <td><strong>Translit (Telugu)</strong></td>
+                    <td class="table-translit-text">guṇavatiyaina bhārya dorukuta arudu aṭṭidi mutyamukaṇṭe amūlyamainadi</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.remove('no-js'); // JS is active
+
+            const acrosticIntroSection = document.getElementById('acrostic-intro-section');
+            const introSteps = Array.from(acrosticIntroSection.getElementsByClassName('animated-card'));
+            const exploreButtonSection = document.getElementById('explore-button-section');
+            const revealFirstWordBtn = document.getElementById('reveal-first-word-btn');
+            const firstWordIntroSection = document.getElementById('first-word-intro-section');
+            const wordIntroItems = Array.from(firstWordIntroSection.getElementsByClassName('word-intro-item'));
+            const fullTableSection = document.getElementById('full-table-section');
+
+            let currentDelay = 1000; // Start delay after initial title animation (handled by CSS)
+
+            // Animate intro steps
+            introSteps.forEach(step => {
+                setTimeout(() => {
+                    step.classList.add('visible');
+                }, currentDelay);
+                currentDelay += 700; // Stagger for each intro card
+            });
+
+            // Animate explore button after intro steps
+            setTimeout(() => {
+                exploreButtonSection.classList.add('visible');
+                exploreButtonSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, currentDelay + 300);
+
+            // Handle button click
+            revealFirstWordBtn.addEventListener('click', function() {
+                // Hide button or change its state if needed
+                exploreButtonSection.style.transition = 'opacity 0.5s, transform 0.5s';
+                exploreButtonSection.style.opacity = '0';
+                exploreButtonSection.style.transform = 'translateY(20px) scale(0.9)';
+                setTimeout(() => { exploreButtonSection.style.display = 'none'; }, 500);
+
+
+                // Show first word intro section
+                firstWordIntroSection.style.display = 'flex'; // or 'block'
+                setTimeout(() => { // Allow display property to apply before transition
+                    firstWordIntroSection.classList.add('visible');
+                    firstWordIntroSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    // Animate items within first word intro
+                    let wordItemDelay = 500; // Start after section is visible
+                    wordIntroItems.forEach(item => {
+                        setTimeout(() => {
+                            item.classList.add('show');
+                        }, wordItemDelay);
+                        wordItemDelay += 250; // Quick stagger for items
+                    });
+
+                    // Show full table after first word intro items are done
+                    setTimeout(() => {
+                        fullTableSection.style.display = 'block';
+                        setTimeout(() => { // Allow display property to apply
+                           fullTableSection.classList.add('visible');
+                           fullTableSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }, 50); // short delay
+                    }, wordItemDelay + 500); // After all word items shown + buffer
+
+                }, 50); // short delay for visibility transition
+            });
+        });
+    </script>
+    <noscript>
+        <style>
+            /* Ensure all sections are visible if JS is off */
+            .main-title, .animated-card, #explore-button-section, #first-word-intro-section, #full-table-section {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            #explore-button-section, #first-word-intro-section, #full-table-section {
+                 display: flex !important; /* or block, ensure visibility */
+            }
+             #full-table-section { display: block !important; }
+        </style>
+    </noscript>
+</body>
+</html>
